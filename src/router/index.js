@@ -5,8 +5,10 @@ import PrivateRoute from './privateRouter/index'
 // screens
 import Login from '../pages/Login'
 import Home from '../pages/Home'
-import Layout from '../components/Layout'
+import LayoutA from '../components/Layout'
 import NotFound from '../components/Notfound'
+import Account from '../pages/Account'
+import Booking from '../pages/Booking'
 
 function Router() {
     return (
@@ -16,10 +18,12 @@ function Router() {
             <Route path="login" element={<Login />} />
 
             {/* main layout */}
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<LayoutA />}>
                 {/* private routes */}
                 <Route element={<PrivateRoute />}>
                     <Route path="home" element={<Home />} />
+                    <Route path="account" element={<Account />} />
+                    <Route path="booking" element={<Booking />} />
                 </Route>
             </Route>
             {/* not found */}
