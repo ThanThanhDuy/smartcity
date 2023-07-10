@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {Button, notification, Table, Tag} from "antd";
+import {Button, Input, notification, Table, Tag} from "antd";
 import axiosClient from "../../apis";
 import moment from "moment";
+import './style.css'
+
+const {Search} = Input;
 
 const STATUS_RENDER = {
     1: {
@@ -139,13 +142,33 @@ function Booking() {
         }
     }
 
+    const onSearch = (value) => {
+        if (value) {
+            const dataSearch = data.filter((item) => item.bookingId === parseInt(value))
+            setData(dataSearch)
+        } else {
+            const getData = async () => {
+                const response = await axiosClient.get(`/Employees/bookings`);
+                setData(response.data);
+            }
+            getData();
+        }
+    }
+
     return <div>
         {contextHolder}
         <Table
             columns={columns}
             dataSource={data}
             bordered
-            title={() => 'Header'}
+            title={() => <Search
+                className="search"
+                placeholder="Seach By ID"
+                onSearch={onSearch}
+                style={{
+                    width: 200,
+                }}
+            />}
             rowKey={(record) => record.bookingId}
         />
     </div>

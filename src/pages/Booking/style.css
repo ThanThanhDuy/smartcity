@@ -1,0 +1,7 @@
+.search .ant-input {
+    height: 35px !important;
+}
+
+.search .ant-input-group-addon .ant-input-search-button {
+    height: 35px !important;
+}
