@@ -167,7 +167,7 @@ function Account() {
                     <Input
                         placeholder=""
                         value={user?.employeeName}
-                        disabled={!isEdit}
+                        disabled={true}
                         onChange={e => {
                             setUser({
                                 ...user,

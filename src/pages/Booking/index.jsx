@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Button, notification, Table, Tag} from "antd";
 import axiosClient from "../../apis";
+import moment from "moment";
 
 const STATUS_RENDER = {
     1: {
@@ -29,30 +30,30 @@ function Booking() {
 
     useEffect(() => {
         const getData = async () => {
-            const response = await axiosClient.get(`/Bookings`);
+            const response = await axiosClient.get(`/Employees/bookings`);
             const res = await axiosClient.get('/BookingDetails')
             const resService = await axiosClient.get('/Services')
 
-            for (let i = 0; i < response.data.length; i++) {
-                let service = []
-                for (let j = 0; j < res.data.length; j++) {
-                    if (response.data[i].bookingId === res.data[j].bookingId) {
-                        response.data[i].price = res.data[j].price
-                        response.data[i].quantity = res.data[j].quantity
-                        response.data[i].totalPrice = res.data[j].totalPrice
-
-                        service.push(res.data[j].serviceId)
-                    }
-                }
-                service = service.map((item) => {
-                    for (let j = 0; j < resService.data.length; j++) {
-                        if (item === resService.data[j].serviceId) {
-                            return resService.data[j].serviceName
-                        }
-                    }
-                })
-                response.data[i].service = service.join(', ')
-            }
+            // for (let i = 0; i < response.data.length; i++) {
+            //     let service = []
+            //     for (let j = 0; j < res.data.length; j++) {
+            //         if (response.data[i].bookingId === res.data[j].bookingId) {
+            //             response.data[i].price = res.data[j].price
+            //             response.data[i].quantity = res.data[j].quantity
+            //             response.data[i].totalPrice = res.data[j].totalPrice
+            //
+            //             service.push(res.data[j].serviceId)
+            //         }
+            //     }
+            //     service = service.map((item) => {
+            //         for (let j = 0; j < resService.data.length; j++) {
+            //             if (item === resService.data[j].serviceId) {
+            //                 return resService.data[j].serviceName
+            //             }
+            //         }
+            //     })
+            //     response.data[i].service = service.join(', ')
+            // }
             setData(response.data);
         }
         getData();
@@ -67,21 +68,22 @@ function Booking() {
             width: 100,
         },
         {
-            title: 'Price',
-            dataIndex: 'price',
+            title: 'Amount Price',
+            dataIndex: 'totalAmount',
 
         },
         {
-            title: 'Quantity',
-            dataIndex: 'quantity',
+            title: 'Employee Quantity',
+            dataIndex: 'empQuantity',
         },
         {
-            title: 'Total Price',
-            dataIndex: 'totalPrice',
-        },
-        {
-            title: 'Services',
-            dataIndex: 'service',
+            title: 'Date Of Booking',
+            dataIndex: 'dateOfBooking',
+            render: (_, {dateOfBooking}) => (
+                <span>
+                   {moment(dateOfBooking).format("DD-MM-YYYY")}
+               </span>
+            ),
         },
         {
             title: 'Status',
