@@ -5,6 +5,8 @@ import {useEffect, useState} from 'react'
 import {Link, Outlet, useLocation} from 'react-router-dom'
 import localService from "../../services/local";
 
+const logo = require('../../assets/logo.png')
+
 const {Header, Content, Footer, Sider} = Layout
 
 function getItem(label, key, icon, children) {
@@ -93,7 +95,14 @@ const LayoutA = () => {
                         boxShadow: '0 1px 4px rgba(0, 21, 41, 0.08)'
                     }}
                 >
-                    <h1>SmartCity Employee</h1>
+                    <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                        <img src={logo} style={{
+                            height: 40,
+                            width: 30,
+
+                        }}/>
+                        <h1>SmartCity Employee</h1>
+                    </div>
                     <Button
                         onClick={() => {
                             localService.removeAccessToken()

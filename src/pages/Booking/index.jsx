@@ -3,6 +3,7 @@ import {Button, Input, notification, Table, Tag} from "antd";
 import axiosClient from "../../apis";
 import moment from "moment";
 import './style.css'
+import {Helmet} from "react-helmet";
 
 const {Search} = Input;
 
@@ -156,6 +157,11 @@ function Booking() {
     }
 
     return <div>
+        <Helmet>
+            <meta charSet="utf-8"/>
+            <title>Booking</title>
+
+        </Helmet>
         {contextHolder}
         <Table
             columns={columns}

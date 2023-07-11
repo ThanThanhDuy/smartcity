@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { Form, Input, Button, Modal } from 'antd'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import React, {useState} from 'react'
+import {Button, Form, Input, Modal} from 'antd'
+import {LockOutlined, UserOutlined} from '@ant-design/icons'
 import './index.css'
 import axiosClient from '../../apis'
 import localService from '../../services/local'
-import { useNavigate } from 'react-router'
+import {useNavigate} from 'react-router'
+import {Helmet} from "react-helmet";
 
 function Login() {
     const [loading, setLoading] = useState(false)
@@ -42,6 +43,11 @@ function Login() {
                 height: '100vh'
             }}
         >
+            <Helmet>
+                <meta charSet="utf-8"/>
+                <title>Login</title>
+
+            </Helmet>
             <div
                 style={{
                     border: '1.5px solid #ccc',
@@ -50,7 +56,7 @@ function Login() {
                     width: 350
                 }}
             >
-                <p style={{ fontSize: 28, margin: 0 }}>SmartCity Employee</p>
+                <p style={{fontSize: 28, margin: 0}}>SmartCity Employee</p>
                 <p
                     style={{
                         fontSize: 14,
@@ -71,11 +77,11 @@ function Login() {
                                 message: 'Please input your username!'
                             }
                         ]}
-                        style={{ marginBottom: 15 }}
+                        style={{marginBottom: 15}}
                     >
                         <Input
                             addonBefore={
-                                <UserOutlined className="site-form-item-icon" />
+                                <UserOutlined className="site-form-item-icon"/>
                             }
                             placeholder="Username"
                         />
@@ -92,7 +98,7 @@ function Login() {
                     >
                         <Input.Password
                             addonBefore={
-                                <LockOutlined className="site-form-item-icon" />
+                                <LockOutlined className="site-form-item-icon"/>
                             }
                             placeholder="Password"
                         />
@@ -102,7 +108,7 @@ function Login() {
                         wrapperCol={{
                             span: 16
                         }}
-                        style={{ marginBottom: 0 }}
+                        style={{marginBottom: 0}}
                     >
                         <Button
                             loading={loading}

@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import {Line} from 'react-chartjs-2';
 import {faker} from '@faker-js/faker';
+import {Helmet} from "react-helmet";
 
 ChartJS.register(
     CategoryScale,
@@ -75,7 +76,15 @@ export const data = {
 };
 
 function Home() {
-    return <Line options={options} data={data}/>;
+    return <>
+        <Helmet>
+            <meta charSet="utf-8"/>
+            <title>Home</title>
+            
+        </Helmet>
+        <Line options={options} data={data}/>
+    </>
+
 }
 
 export default Home;
