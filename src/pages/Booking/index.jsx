@@ -71,8 +71,8 @@ function Booking() {
             width: 100,
         },
         {
-            title: 'Amount Price',
-            dataIndex: 'totalAmount',
+            title: 'Account ID',
+            dataIndex: 'accountId',
 
         },
         {
