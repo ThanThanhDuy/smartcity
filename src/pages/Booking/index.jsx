@@ -104,22 +104,25 @@ function Booking() {
             width: 150,
             align: 'center',
             render: (_, record) => (
-                <div>
+                <div style={{display: 'flex', gap: '8px'}}>
                     {
                         record.statusBooking === 1 &&
-                        <Button type='primary' onClick={() => handleConfirm(record)}>Confirm</Button>
+                        <Button type='primary' onClick={() => handleConfirm(record, true)}>Confirm</Button>
                     }
-
+                    {
+                        record.statusBooking === 1 &&
+                        <Button danger onClick={() => handleConfirm(record, false)}>Cancel</Button>
+                    }
                 </div>
             ),
         },
     ];
 
-    async function handleConfirm(record) {
+    async function handleConfirm(record, value) {
         try {
             let formData = new FormData();
             formData.append('bookingId', record.bookingId)
-            formData.append('confirm', true)
+            formData.append('confirm', value)
             const response = await axiosClient.post(`/Employees/confirm-task`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
