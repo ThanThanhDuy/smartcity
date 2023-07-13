@@ -129,13 +129,18 @@ function Booking() {
                 }
             })
             if (response.statusCode === 200) {
-                const dataUpdate = data.map((item) => {
-                    if (item.bookingId === record.bookingId) {
-                        item.statusBooking = 2
-                    }
-                    return item
-                })
-                setData(dataUpdate)
+                if (value) {
+                    const dataUpdate = data.map((item) => {
+                        if (item.bookingId === record.bookingId) {
+                            item.statusBooking = 2
+                        }
+                        return item
+                    })
+                    setData(dataUpdate)
+                } else {
+                    const dataUpdate = data.filter((item) => item.bookingId !== record.bookingId)
+                    setData(dataUpdate)
+                }
                 openNotificationWithIcon('success', 'Success', response.message)
             } else {
                 openNotificationWithIcon('error', 'Error', response.message)
